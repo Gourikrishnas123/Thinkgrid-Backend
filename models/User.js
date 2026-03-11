@@ -1,0 +1,15 @@
+export const createUser = ({ id, name, email, picture = '', bio = '', skills = [] }) => ({
+  id,
+  name,
+  email,
+  picture,
+  bio,
+  skills,
+  followers: 0,
+  following: 0,
+  points: 0,
+  rank: 'Member',
+  streak: 0,
+  verified: false,
+  createdAt: new Date().toISOString(),
+});
