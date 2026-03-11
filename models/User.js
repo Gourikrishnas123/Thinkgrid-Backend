@@ -1,15 +1,17 @@
-export const createUser = ({ id, name, email, picture = '', bio = '', skills = [] }) => ({
-  id,
-  name,
-  email,
-  picture,
-  bio,
-  skills,
-  followers: 0,
-  following: 0,
-  points: 0,
-  rank: 'Member',
-  streak: 0,
-  verified: false,
-  createdAt: new Date().toISOString(),
-});
+import mongoose from 'mongoose';
+
+const userSchema = new mongoose.Schema({
+  name:     { type: String, required: true },
+  email:    { type: String, required: true, unique: true },
+  picture:  { type: String, default: '' },
+  bio:      { type: String, default: '' },
+  skills:   { type: [String], default: [] },
+  followers:{ type: Number, default: 0 },
+  following:{ type: Number, default: 0 },
+  points:   { type: Number, default: 0 },
+  rank:     { type: String, default: 'Member' },
+  streak:   { type: Number, default: 0 },
+  verified: { type: Boolean, default: false },
+}, { timestamps: true }); // ✅ auto adds createdAt & updatedAt
+
+export default mongoose.model('User', userSchema);
